@@ -94,6 +94,25 @@ describe Game do
 
     expect(output.string).to include("_|_|_\n_|_|_\n_|_|X\n")
   end
+
+  it 'it should take multiple inputs' do
+    input.move = "1"
+    game.run
+    input.move = "2"
+    game.run
+
+    expect(output.string).to include("X|O|_\n_|_|_\n_|_|_\n")
+  end
+
+  it "should fill the board" do
+  input.move = 1
+  while input.move <= 9
+    game.run
+    input.move +=1
+  end
+
+    expect(output.string).to include("X|O|X\nO|X|O\nX|O|X\n")
+  end
 end
 
 
