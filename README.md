@@ -145,7 +145,12 @@ At the end of the day I was getting to know some of the other apprentices. Noah 
 
 We wrote some basic unit tests together so I could see what we were discussing in action. It was extremely helpful and I feel like something definitely clicked for me after that conversation. As Brian said, "TDD is easy, but you ahve to get yourself into the right mindset"
 
-I'll be deleting all the code and tests that I've written up till now and try TDD once again with a blank slate save the code Brian and I worte together.
+I'll be deleting all the code and tests that I've written up till now and try TDD once again with a blank slate save the code Brian and I wrote together.
+
+#9/28 - Restarting
+
+I tried for a bit to start from where Brian and I had left off. However, after some tepid attempts it was pretty clear that I was still mentally stuck. Something about TDD was just not clicking. I had all this previous knowledge of how I laid out the domain model in the previous iteration of the game and I was having a very difficult time, letting that go and starting fresh. I had spent so much time thinking about how to lay out my classes and make things as expressive and elegant as possible that it was really difficult to dislodge those designs from my brain and start with a beginner's mind.
+
 
 
 
