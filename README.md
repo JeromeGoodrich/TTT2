@@ -151,6 +151,12 @@ I'll be deleting all the code and tests that I've written up till now and try TD
 
 I tried for a bit to start from where Brian and I had left off. However, after some tepid attempts it was pretty clear that I was still mentally stuck. Something about TDD was just not clicking. I had all this previous knowledge of how I laid out the domain model in the previous iteration of the game and I was having a very difficult time, letting that go and starting fresh. I had spent so much time thinking about how to lay out my classes and make things as expressive and elegant as possible that it was really difficult to dislodge those designs from my brain and start with a beginner's mind.
 
+The conversation with Chris last night helped a bit. He reminded me of the introduction to Chris Pine's book, wherein the author explains all the detailed steps/instructions we would have to give a computer in order to have it make us a sandwich. I think I had forgotten just how granular and rudimentary those instructions must be. Writing tests is almost like writing those instructions at least explaining to the computer what the expectations are for a given class or method. With the instructions in hand we can write the actual functional code to make the computer obey the instructions.
+
+
+
+
+
 
 
 
