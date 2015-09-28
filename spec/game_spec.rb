@@ -12,21 +12,24 @@ class Board
     @rows = rows
     @columns = columns
     @board = (1..(@rows*@columns)).to_a
-    @ui = ui
   end
 
   def set_move(space, token)
-    if read_move(space) == Fixnum
+    if available_spaces.include?(space)
       @board[(space-1)] = token
     else
-      ui.invalid_move
-      set_move(space_token)
+      #this is not great design but I can't figure out how get rid of it right now
+      return "invalid move"
+      set_move(space, token)
     end
   end
 
   def read_move(space)
     @board[(space-1)]
+  end
 
+  def available_spaces
+    @board - ["x","o"]
   end
 end
 
@@ -152,7 +155,13 @@ describe Game do
   it "prevents a space from being marked twice" do
     board.set_move(1,"x")
 
-    expect{board.set_move(1,"o")}.to eq(ui.invalid_move)
+    expect(board.set_move(1,"o")).to eq("invalid move")
+  end
+
+  it "returns an array of available spaces" do
+    board.set_move(1,"x")
+
+    expect(board.available_spaces).to eq([2,3,4,5,6,7,8,9])
   end
 
 #   it "loops through the game sequence until the game is over"

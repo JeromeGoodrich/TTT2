@@ -38,4 +38,8 @@ class UserInterface
   def computer_thinking
     @output.print "the computer is thinking..."
   end
+
+  def invalid_move
+    @output.print "invalid_move"
+  end
 end
