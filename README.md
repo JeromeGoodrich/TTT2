@@ -153,6 +153,18 @@ I tried for a bit to start from where Brian and I had left off. However, after s
 
 The conversation with Chris last night helped a bit. He reminded me of the introduction to Chris Pine's book, wherein the author explains all the detailed steps/instructions we would have to give a computer in order to have it make us a sandwich. I think I had forgotten just how granular and rudimentary those instructions must be. Writing tests is almost like writing those instructions at least explaining to the computer what the expectations are for a given class or method. With the instructions in hand we can write the actual functional code to make the computer obey the instructions.
 
+#9/30 - Getting Back on The Horse
+
+I finally have some confidence that I'm doing TDD in a way that makes sense. I'm really trying to focus on testing behaviors and not so much implementations. Meaning that I'm testing whether the code will perform the specific function that I need it to vs. testing whether it's set-up in a certain way. I'm beginning to understand the subtleties and nuance that exist there.
+
+For instance I want to be able to test whehter the program can detect a winner for the 8 different scenarios in which a player can win a game of tic tac toe. These boil down to 3 specific behaviors. declaring a winner when a row on the board is filled with 3 of the same tokens, and doing the same for columns and diagonals. My first test considers the first behavior I want to test for, declaring a winner for a filled row. I was told that a helpful way to think aobut writing a test is the following format. Given (blank) => Something Happens => So we expect (blank)
+
+So the first thing I like to do when writing a test is consider the givens, what is a pre requisite for a a winner being declared? Well, the board probably needs to be filled so that there is a winner on the baord. So my given might be using my `set_move` method to mark a board so that a winner can be declared. The next thing to consider is what needs to happen for us to expect something. My initial thought here is that we will want to be able to look at the board that we just marked and see if it has the 3 tokens in a row we are looking for. So we might name that method `check_row`. Finally, given that we've marked a row with 3 tokens and we've checked that checked that row what might we expect? Well we'd proably expect to declare a winner if there is one.
+
+So now that I'm working on the test pass, I've realized I may have overcomplicated things a bit.
+for instance, instead of seeing if there is a winner generally it might make sense to rename my check_row method to also encapsulate that checking if there is a winner. This makes sense ot me because the only time I'll check a row is if I'm checking for a winner. so with this realization I can just directly test whether or not the program can declare a winnner base on a row being filled.
+
+After writing passing tests for declaring a winner for rows columns and diagonals I asked Chris for some advice on how to make my conditional statements a bit more elegant and he showed me that I had some flaws in my code and that it wasn't doing what I wanted it to. on top of that, I wasn't accounting for variable board size in my test.
 
 
 

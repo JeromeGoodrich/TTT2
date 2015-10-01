@@ -1,7 +1,12 @@
 require "rspec"
 require "user_interface"
+require "stringio"
+require "board"
 
 describe UserInterface do
+  let(:ui) {UserInterface.new(output,board)}
+  let(:board) {Board.new(3,3)}
+  let(:output) {StringIO.new}
 
   describe "#greeting" do
     it "returns \'Welcome to Tic Tac Toe\'" do

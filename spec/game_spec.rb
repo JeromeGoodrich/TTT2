@@ -6,33 +6,6 @@ require "user_interface"
 class HumanPlayer
 end
 
-class Board
-
-  def initialize(rows,columns)
-    @rows = rows
-    @columns = columns
-    @board = (1..(@rows*@columns)).to_a
-  end
-
-  def set_move(space, token)
-    if available_spaces.include?(space)
-      @board[(space-1)] = token
-    else
-      #will need to add this validation elsewhere
-      return "invalid move"
-      set_move(space, token)
-    end
-  end
-
-  def read_move(space)
-    @board[(space-1)]
-  end
-
-  def available_spaces
-    @board - ["x","o"]
-  end
-end
-
 describe Game do
   let(:output) {StringIO.new}
   let(:game) { Game.new(output,input) }
@@ -72,52 +45,79 @@ describe Game do
     expect(board).to be_instance_of Board
   end
 
-  it "allows a player to make a move on the board by inputing the number of a space " do
+  describe "#set_move" do
+    it "allows a player to make a move on the board by inputing the number of a space " do
+      board.set_move(1, "x")
 
-    board.set_move(1, "x")
+      expect(board.read_move(1)).to eq("x")
+    end
 
-    expect(board.read_move(1)).to eq("x")
+    #temporary test will likely add validation somewhere else
+    it "prevents a space from being marked twice" do
+      board.set_move(1,"x")
+
+      expect(board.set_move(1,"o")).to eq("invalid move")
+    end
   end
 
-  it "prevents a space from being marked twice" do
-    board.set_move(1,"x")
+  describe "#available_spaces" do
+    it "returns an array of available spaces" do
+      board.set_move(1,"x")
 
-    expect(board.set_move(1,"o")).to eq("invalid move")
+      expect(board.available_spaces).to eq([2,3,4,5,6,7,8,9])
+    end
   end
 
-  it "returns an array of available spaces" do
-    board.set_move(1,"x")
+  describe "#winning_row?" do
+    it "declares a winner if any row is marked by the same 3 tokens" do
+      board.set_move(4,"o")
+      board.set_move(5,"o")
+      board.set_move(6,"o")
 
-    expect(board.available_spaces).to eq([2,3,4,5,6,7,8,9])
+      expect(board.winning_row?).to eq(true)
+    end
   end
 
-  it "loops through the game sequence until the game is over"
+  # describe "#winning_column?" do
+  #   it "declares a winner if any column is marked by the same 3 tokens" do
+  #     board.set_move(1,"o")
+  #     board.set_move(4,"o")
+  #     board.set_move(7,"o")
+
+  #     expect(board.winning_column?).to eq(true)
+  #   end
+  # end
+
+  # describe "#winning_diagonal?" do
+  #   it "declares a winner if any diagonal is marked by the same 3 tokens" do
+  #     board.set_move(1,"o")
+  #     board.set_move(5,"o")
+  #     board.set_move(9,"o")
+
+  #     expect(board.winning_diagonal?).to eq(true)
+  #   end
+  # end
+
+  # describe "#tie_game?" do
+  #   it "declares a tie when all the spaces on the board are marked and no winner has been declared" do
+  #     board.set_move(1,"x")
+  #     board.set_move(2,"o")
+  #     board.set_move(3,"x")
+  #     board.set_move(4,"o")
+  #     board.set_move(5,"x")
+  #     board.set_move(6,"x")
+  #     board.set_move(7,"o")
+  #     board.set_move(8,"x")
+  #     board.set_move(9,"o")
+
+  #     expect(board.tie_game?).to eq(true)
+  #   end
+  # end
+
 
   it "ends the game if all the spaces on the board are marked"
-
-  it "declares a winner if any row is marked by the same 3 tokens"
-
-  it "declares a winner if any column is marked by the same 3 tokens"
-
-  it "declares a winner if any diagonal is marked by the same 3 tokens"
-
-  it "declares a tie if all the spaces on the board are marked and no winner has been declared"
 
   it "ends the game if there is a winner"
 
   it "ends the game if there is a tie"
-
-  it "creates a TicTacToe board with specified dimensions"
-
-  it "prints out the board"
-
-  it "numbers spaces on the board 1-9 by default"
-
-  it "allows a player to mark the space on the board corresponding to an input 1-9 with their token"
-
-  it "prevents a space that has already been marked to be marked again"
-
-  it "it resets the a marked space to it's original number value"
-  it
-
 end
