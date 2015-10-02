@@ -31,4 +31,13 @@ class Game
     players[0].name = player1_name
     players[1].name = player2_name
   end
+
+  def assign_token(players,player1_token,player2_token)
+    players[0].token = player1_token
+    players[1].token = player2_token
+  end
+
+  def get_move(player,move)
+    player.move = move
+  end
 end

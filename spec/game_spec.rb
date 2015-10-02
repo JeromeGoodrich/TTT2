@@ -5,7 +5,7 @@ require "stringio"
 require "user_interface"
 
 class HumanPlayer
-  attr_accessor :name
+  attr_accessor :name, :token, :move
 end
 
 describe Game do
@@ -16,25 +16,42 @@ describe Game do
   let(:player1) {HumanPlayer.new}
   let(:player2) {HumanPlayer.new}
 
-it "runs the game"
+  it "runs the game"
 
-it "creates players for the game" do
-  expect(game.create_players(2)).to eq([player1,player2])
-end
+  it "creates players for the game" do
+    expect(game.create_players(2)).to eq([player1,player2])
+  end
 
-it "gives names to each player" do
-  game.create_players(2)
-  players = [player1,player2]
+  it "gives names to each player" do
+    players = [player1,player2]
 
-  game.name_players(players,"Jerome","Sol")
+    game.name_players(players,"Jerome","Sol")
 
-  expect(player1.name).to eq("Jerome")
-  expect(player2.name).to eq("Sol")
-end
+    expect(player1.name).to eq("Jerome")
+    expect(player2.name).to eq("Sol")
+  end
 
 
-it "assigns a token to each player"
+  it "assigns a token to each player" do
+    players = [player1,player2]
+    tokens = ["x","o"]
 
-it "gets a move from each player"
+    game.assign_token(players,"x","o")
+
+    expect(player1.token).to eq("x")
+    expect(player2.token).to eq("o")
+  end
+
+  it "gets a move from each player" do
+    player = player1
+    move = 5
+
+    game.get_move(player, move)
+
+    expect(player1.move).to eq(5)
+  end
+
+
+
 
 end
