@@ -78,25 +78,25 @@ describe Game do
     end
   end
 
-  # describe "#winning_column?" do
-  #   it "declares a winner if any column is marked by the same 3 tokens" do
-  #     board.set_move(1,"o")
-  #     board.set_move(4,"o")
-  #     board.set_move(7,"o")
+  describe "#winning_column?" do
+    it "declares a winner if any column is marked by the same 3 tokens" do
+      board.set_move(1,"o")
+      board.set_move(4,"o")
+      board.set_move(7,"o")
 
-  #     expect(board.winning_column?).to eq(true)
-  #   end
-  # end
+      expect(board.winning_column?).to eq(true)
+    end
+  end
 
-  # describe "#winning_diagonal?" do
-  #   it "declares a winner if any diagonal is marked by the same 3 tokens" do
-  #     board.set_move(1,"o")
-  #     board.set_move(5,"o")
-  #     board.set_move(9,"o")
+  describe "#winning_diagonal?" do
+    it "declares a winner if any diagonal is marked by the same 3 tokens" do
+      board.set_move(1,"o")
+      board.set_move(5,"o")
+      board.set_move(9,"o")
 
-  #     expect(board.winning_diagonal?).to eq(true)
-  #   end
-  # end
+      expect(board.winning_diagonal?).to eq(true)
+    end
+  end
 
   # describe "#tie_game?" do
   #   it "declares a tie when all the spaces on the board are marked and no winner has been declared" do

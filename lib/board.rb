@@ -28,34 +28,43 @@ class Board
     depth = Math.sqrt(@rows*@columns)
     rows = @board.each_slice(depth).to_a
     rows.each do |row|
-      row = row.flatten
-      row -= ["x","o"]
-      if row.empty?
+      xrow = row - ["x"]
+      orow = row - ["o"]
+      if xrow.empty? || orow.empty?
         return true
+        break
       end
     end
   end
 
   def winning_column?
-    if read_move(1) && read_move(4) && read_move(7) == "x" || "o"
-      return true
-    elsif read_move(2) && read_move(5) && read_move(8) == "x" || "o"
-      return true
-    elsif read_move(1) && read_move(2) && read_move(3) == "x" || "o"
-      return true
-    else
-      return false
+    depth = Math.sqrt(@rows*@columns)
+    a = []
+    columns = []
+    starting_points = (0..depth).to_a
+    count = 0
+    starting_points.each do |starting_point|
+      while count <= depth - 1
+        a << @board[starting_point + (depth*count)]
+      count +=1
+      end
+      columns << a
+    end
+
+    columns.each do |column|
+      xcolumn = column - ["x"]
+      ocolumn = column - ["o"]
+      if xcolumn.empty? || ocolumn.empty?
+        return true
+        break
+      end
     end
   end
 
+
+
   def winning_diagonal?
-    if read_move(1) && read_move(5) && read_move(9) == "x" || "o"
-      return true
-    elsif read_move(3) && read_move(5) && read_move(7) == "x" || "o"
-      return true
-    else
-      return false
-    end
+
   end
 
   def tie_game?
