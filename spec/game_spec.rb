@@ -90,29 +90,29 @@ describe Game do
 
   describe "#winning_diagonal?" do
     it "declares a winner if any diagonal is marked by the same 3 tokens" do
-      board.set_move(1,"o")
+      board.set_move(3,"o")
       board.set_move(5,"o")
-      board.set_move(9,"o")
+      board.set_move(7,"o")
 
       expect(board.winning_diagonal?).to eq(true)
     end
   end
 
-  # describe "#tie_game?" do
-  #   it "declares a tie when all the spaces on the board are marked and no winner has been declared" do
-  #     board.set_move(1,"x")
-  #     board.set_move(2,"o")
-  #     board.set_move(3,"x")
-  #     board.set_move(4,"o")
-  #     board.set_move(5,"x")
-  #     board.set_move(6,"x")
-  #     board.set_move(7,"o")
-  #     board.set_move(8,"x")
-  #     board.set_move(9,"o")
+  describe "#tie_game?" do
+    it "declares a tie when all the spaces on the board are marked and no winner has been declared" do
+      board.set_move(1,"x")
+      board.set_move(2,"o")
+      board.set_move(3,"x")
+      board.set_move(4,"o")
+      board.set_move(5,"x")
+      board.set_move(6,"x")
+      board.set_move(7,"o")
+      board.set_move(8,"x")
+      board.set_move(9,"o")
 
-  #     expect(board.tie_game?).to eq(true)
-  #   end
-  # end
+      expect(board.tie_game?).to eq(true)
+    end
+  end
 
 
   it "ends the game if all the spaces on the board are marked"
