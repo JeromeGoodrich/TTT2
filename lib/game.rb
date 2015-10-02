@@ -1,34 +1,34 @@
 class Game
 
-  def initialize(output, input)
-    @output = output
-    @input = input
+  def initialize(ui,player1,player2)
+    @ui = ui
+    @player1 = player1
+    @player2 = player2
   end
 
   def run
-    @output.print "welcome to ttt"
-
-    @output.print "how many players will be playing?"
-
-    @output.print "please type your name"
-
-    @output.print "would you like to play with x or o"
-
-    @output.print "Player 1, make your move"
+    @ui.greeting
+    number = @ui.player_number
+    create_players(number)
+    name_players(players, player1_name, player2_name= "Player2")
+    ui.assign_token
+    assign_player_token()
+    @ui.print_board
+    @ui.make_move
+    get_player_move(player, token)
   end
 
-
-  def number_of_players(number)
-    number
-  end
-
-  def create_players(number)
-    player_array = []
-    if number == 2
-      @player1 == HumanPlayer.new
-      @player2 == HumanPlayer.new
-      player_array << @player1
-      player_array << @player2
+  def create_players(number_of_players)
+    players = []
+    if number_of_players == 2
+      players << @player1
+      players << @player2
     end
+    return players
+  end
+
+  def name_players(players,player1_name,player2_name="Computer")
+    players[0].name = player1_name
+    players[1].name = player2_name
   end
 end

@@ -1,42 +1,40 @@
 require "rspec"
-require "stringio"
 require "game"
+require "board"
+require "stringio"
 require "user_interface"
 
 class HumanPlayer
+  attr_accessor :name
 end
 
 describe Game do
-  let(:output) {StringIO.new}
-  let(:game) { Game.new(output,input) }
-  let(:input) {StringIO.new}
+  let(:game) {Game.new(ui,player1,player2)}
   let(:ui) {UserInterface.new(output,board)}
   let(:board) {Board.new(3,3)}
+  let(:output) {StringIO.new}
+  let(:player1) {HumanPlayer.new}
+  let(:player2) {HumanPlayer.new}
 
-  describe "#number_of_players" do
-    it "takes a player input of 1" do
+it "runs the game"
 
-      expect(game.number_of_players(1)).to eq(1)
-    end
+it "creates players for the game" do
+  expect(game.create_players(2)).to eq([player1,player2])
+end
 
-    it "takes player input of 2" do
+it "gives names to each player" do
+  game.create_players(2)
+  players = [player1,player2]
 
-      expect(game.number_of_players(2)).to eq(2)
-    end
-  end
+  game.name_players(players,"Jerome","Sol")
 
-  describe "#create_players" do
-    it "creates two human players" do
-      player_array = []
-      @player1 = HumanPlayer.new
-      @player2 = HumanPlayer.new
-      player_array << @player1
-      player_array << @player2
+  expect(player1.name).to eq("Jerome")
+  expect(player2.name).to eq("Sol")
+end
 
-      game.create_players(2)
 
-      expect(player_array[0]).to be_instance_of HumanPlayer
-      expect(player_array[1]).to be_instance_of HumanPlayer
-    end
-  end
+it "assigns a token to each player"
+
+it "gets a move from each player"
+
 end

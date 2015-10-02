@@ -166,6 +166,15 @@ for instance, instead of seeing if there is a winner generally it might make sen
 
 After writing passing tests for declaring a winner for rows columns and diagonals I asked Chris for some advice on how to make my conditional statements a bit more elegant and he showed me that I had some flaws in my code and that it wasn't doing what I wanted it to. on top of that, I wasn't accounting for variable board size in my test.
 
+#10/2 The Craftsman Ship
+
+I spent the first part of the day making my tests for various winning conditions pass while keeping in mind the fact that my board size might be variable. It was fun trying to figure out how to do this and I left for lunch fairly confident that I hand found some good solutions. Over lunch, I attended 2 presentations. the first concerned discipline and professionalism, and the second mindfulness and programming. The first made an impression on me, because it reminded me why I had sought out this path in the first place: to continue to learn and apply that learning to becoming a craftsman. It reminded me that the point of doing all of this was to learn, and not necessarily to do things fast, or even right at first. It focused on discipline and repetition, doing the small things, and really taking pride in one's work. This emphasis on personal development and commitment to quality really resonated. I enjoyed the second talk, because I'm personally very into mindfulness, and it was nice to hear it being talked about and promoted in the workplace. I had redbull during the talk, and immediately regretted it, as we talked about taking notice of the sensations within the body, I immediately reencountered the familiar frantic jitteriness that takes hold of me, I guess that's my version of the wings red bull supposedly endows.
+
+When I got back to my computer, I wanted to start working on testing my game class, after exporting all my tests to  their respective spec files, my game file was looking rather bare. I had a couple  of tests to account fo the creation of players, but I had borrowed those from someone elses code a while back when I had first started trying to reconstruct my TTT game using TDD. I pulled up that codebase for a hint of what to do next and soon found myself simply copying his code. It was certainly easier, but it was lazy, it wasn't disciplined and it certainly wasn't what a craftsman would do. So I deleted all the code in my game_spec.rb file and started over with a clear conscience determined to do it again with the mentality of craftsman.
+
+
+
+
 
 
 
