@@ -11,7 +11,7 @@ end
 describe Game do
   let(:game) {Game.new(ui,player1,player2)}
   let(:ui) {UserInterface.new(output,board)}
-  let(:board) {Board.new(3,3)}
+  let(:board) {Board.new(9)}
   let(:output) {StringIO.new}
   let(:player1) {HumanPlayer.new}
   let(:player2) {HumanPlayer.new}
@@ -31,7 +31,6 @@ describe Game do
     expect(player2.name).to eq("Sol")
   end
 
-
   it "assigns a token to each player" do
     players = [player1,player2]
     tokens = ["x","o"]
@@ -50,8 +49,4 @@ describe Game do
 
     expect(player1.move).to eq(5)
   end
-
-
-
-
 end

@@ -2,20 +2,13 @@ require "rspec"
 require "board"
 
 describe Board do
-  let(:board) {Board.new(3,3)}
+  let(:board) {Board.new(9)}
 
   describe "#set_move" do
     it "allows a player to make a move on the board by inputing the number of a space " do
       board.set_move(1, "x")
 
       expect(board.read_move(1)).to eq("x")
-    end
-
-    #temporary test will likely add validation somewhere else
-    it "prevents a space from being marked twice" do
-      board.set_move(1,"x")
-
-      expect(board.set_move(1,"o")).to eq("invalid move")
     end
   end
 

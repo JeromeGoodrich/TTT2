@@ -1,32 +1,56 @@
 class Board
 
-  def initialize(rows,columns)
-    @rows = rows
-    @columns = columns
-    @board = (1..(@rows*@columns)).to_a
+  attr_reader :size, :board
+  def initialize(size)
+    @size = size
+    @board = (1..(@size)).to_a
   end
 
-  def set_move(space, token)
-    if available_spaces.include?(space)
-      @board[(space-1)] = token
-    else
-      #will need to add this validation elsewhere
-      return "invalid move"
-      set_move(space, token)
+  def rows
+    board.each_slice(depth).to_a
+  end
+
+  def columns
+    column = []
+    array_of_columns = []
+    first_of_columns = (0..depth).to_a
+    count = 0
+
+    first_of_columns.each do |first_of_column|
+      while count <= depth - 1
+        column << @board[first_of_column + (depth*count)]
+        count +=1
+      end
+      array_of_columns << column
+      return array_of_columns
     end
   end
 
-  def read_move(space)
-    @board[(space-1)]
+  def depth
+    Math.sqrt(size)
+  end
+
+  def is_move_valid?
+    if available_spaces.include?(move)
+     return true
+    else
+      return "invalid move"
+    end
+  end
+
+  def set_move(move, token)
+    board[(move-1)] = token
+  end
+
+  def read_move(move)
+    board[(move-1)]
   end
 
   def available_spaces
-    @board - ["x","o"]
+    board - ["x","o"]
   end
 
   def winning_row?
-    depth = Math.sqrt(@rows*@columns)
-    rows = @board.each_slice(depth).to_a
     rows.each do |row|
       xrow = row - ["x"]
       orow = row - ["o"]
@@ -38,19 +62,6 @@ class Board
   end
 
   def winning_column?
-    depth = Math.sqrt(@rows*@columns)
-    a = []
-    columns = []
-    starting_points = (0..depth).to_a
-    count = 0
-    starting_points.each do |starting_point|
-      while count <= depth - 1
-        a << @board[starting_point + (depth*count)]
-        count +=1
-      end
-      columns << a
-    end
-
     columns.each do |column|
       xcolumn = column - ["x"]
       ocolumn = column - ["o"]
@@ -62,11 +73,10 @@ class Board
   end
 
   def winning_diagonal?
-    depth = Math.sqrt(@rows*@columns)
     count = 0
     diagonal = []
     reverse_diagonal = []
-    while count <= depth -1
+    while count <= depth-1
       diagonal << @board[0 + ((depth+1)*count)]
       reverse_diagonal << @board[(depth-1) +((depth-1)*count)]
       count += 1

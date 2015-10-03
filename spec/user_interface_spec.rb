@@ -5,7 +5,7 @@ require "board"
 
 describe UserInterface do
   let(:ui) {UserInterface.new(output,board)}
-  let(:board) {Board.new(3,3)}
+  let(:board) {Board.new(9)}
   let(:output) {StringIO.new}
 
   describe "#greeting" do
