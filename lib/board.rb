@@ -26,6 +26,26 @@ class Board
     end
   end
 
+  def diagonal
+    count = 0
+    diagonal_spaces = []
+      while count <= depth-1
+        diagonal_spaces << @board[0 + ((depth+1)*count)]
+        count += 1
+      end
+      return diagonal_spaces
+  end
+
+  def reverse_diagonal
+    count = 0
+    reverse_diagonal_spaces = []
+    while count <= depth-1
+      reverse_diagonal_spaces << @board[(depth-1) +((depth-1)*count)]
+      count += 1
+    end
+    return reverse_diagonal_spaces
+  end
+
   def depth
     Math.sqrt(size)
   end
@@ -73,23 +93,16 @@ class Board
   end
 
   def winning_diagonal?
-    count = 0
-    diagonal = []
-    reverse_diagonal = []
-    while count <= depth-1
-      diagonal << @board[0 + ((depth+1)*count)]
-      reverse_diagonal << @board[(depth-1) +((depth-1)*count)]
-      count += 1
-    end
     xdiagonal = diagonal - ["x"]
     odiagonal = diagonal - ["o"]
     xreverse_diagonal = reverse_diagonal - ["x"]
     oreverse_diagonal = reverse_diagonal - ["o"]
-    if xdiagonal.empty? || odiagonal.empty?
-      return true
-    elsif xreverse_diagonal.empty? || oreverse_diagonal.empty?
-      return true
-    end
+
+      if xdiagonal.empty? || odiagonal.empty?
+        return true
+      elsif xreverse_diagonal.empty? || oreverse_diagonal.empty?
+        return true
+      end
   end
 
   def tie_game?

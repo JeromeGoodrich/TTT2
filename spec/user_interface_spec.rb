@@ -83,5 +83,13 @@ describe UserInterface do
     end
   end
 
+  describe "#game_over" do
+    it "returns the 'The game is over. Goodbye!' when the game is over" do
+      ui.game_over
+
+      expect(output.string).to include("The game is over. Goodbye!")
+    end
+  end
+
 
 end

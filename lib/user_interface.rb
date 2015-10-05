@@ -42,4 +42,8 @@ class UserInterface
   def invalid_move
     @output.print "invalid_move"
   end
+
+  def game_over
+    @output.print "The game is over. Goodbye!"
+  end
 end

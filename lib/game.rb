@@ -7,19 +7,19 @@ class Game
   end
 
   def run
-    # @ui.greeting
-    # number_of_players = @ui.player_number
-    # players = create_players(number_of_players)
-    # player1_name = @ui.player_name
-    # player2_name = @ui.player_name
-    # name_players(players,player1_name,player2_name)
-    # player1_token = @ui.which_token
-    # assign_token(players, player1_token, player2_token)
-    # game_loop(players)
+    @ui.greeting
+    number_of_players = @ui.player_number
+    players = create_players(number_of_players)
+    player1_name = @ui.player_name
+    player2_name = @ui.player_name
+    name_players(players,player1_name,player2_name)
+    player1_token = @ui.which_token
+    assign_token(players, player1_token, player2_token)
+    game_loop(players)
   end
 
   def game_loop(players)
-    # if game_over?
+    # if @board.game_over?
     #   @ui.game_over
     #   exit
     # else
@@ -49,11 +49,11 @@ class Game
   end
 
   def assign_token(players,player1_token,player2_token="o")
-    if player1_token == "o"
-      player2_token = "x"
-    end
-    players[0].token = player1_token
-    players[1].token = player2_token
+      if player1_token == "o"
+        player2_token = "x"
+      end
+      players[0].token = player1_token
+      players[1].token = player2_token
   end
 
   def get_move(player,move)
