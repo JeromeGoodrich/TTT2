@@ -1,13 +1,12 @@
 class Board
-
-  attr_reader :size, :board
+  attr_reader :size, :array_of_spaces
   def initialize(size)
     @size = size
-    @board = (1..(@size)).to_a
+    @array_of_spaces = (1..(@size)).to_a
   end
 
   def rows
-    board.each_slice(depth).to_a
+    array_of_spaces.each_slice(depth).to_a
   end
 
   def columns
@@ -18,7 +17,7 @@ class Board
 
     first_of_columns.each do |first_of_column|
       while count <= depth - 1
-        column << @board[first_of_column + (depth*count)]
+        column << @array_of_spaces[first_of_column + (depth*count)]
         count +=1
       end
       array_of_columns << column
@@ -30,7 +29,7 @@ class Board
     count = 0
     diagonal_spaces = []
       while count <= depth-1
-        diagonal_spaces << @board[0 + ((depth+1)*count)]
+        diagonal_spaces << @array_of_spaces[0 + ((depth+1)*count)]
         count += 1
       end
       return diagonal_spaces
@@ -40,7 +39,7 @@ class Board
     count = 0
     reverse_diagonal_spaces = []
     while count <= depth-1
-      reverse_diagonal_spaces << @board[(depth-1) +((depth-1)*count)]
+      reverse_diagonal_spaces << @array_of_spaces[(depth-1) +((depth-1)*count)]
       count += 1
     end
     return reverse_diagonal_spaces
@@ -59,15 +58,16 @@ class Board
   end
 
   def set_move(move, token)
-    board[(move-1)] = token
+    array_of_spaces[(move-1)] = token
+    return self
   end
 
   def read_move(move)
-    board[(move-1)]
+    array_of_spaces[(move-1)]
   end
 
   def available_spaces
-    board - ["x","o"]
+    array_of_spaces - ["x","o"]
   end
 
   def winning_row?
@@ -90,6 +90,7 @@ class Board
         break
       end
     end
+    return false
   end
 
   def winning_diagonal?

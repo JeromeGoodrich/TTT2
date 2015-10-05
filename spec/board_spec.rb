@@ -12,6 +12,14 @@ describe Board do
     end
   end
 
+  describe "#set_move" do
+    it "returns itself " do
+      same_board = board.set_move(1, "x")
+
+      expect(board).to eq(same_board)
+    end
+  end
+
   describe "#available_spaces" do
     it "returns an array of available spaces" do
       board.set_move(1,"x")

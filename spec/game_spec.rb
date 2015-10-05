@@ -4,21 +4,26 @@ require "board"
 require "stringio"
 require "user_interface"
 require "human_player"
-
+require "computer_player"
 
 describe Game do
-  let(:game) {Game.new(ui,player1,player2)}
+  let(:game) {Game.new(ui,player1,player2, computer_player)}
   let(:ui) {UserInterface.new(output,board)}
   let(:board) {Board.new(9)}
   let(:output) {StringIO.new}
   let(:player1) {HumanPlayer.new}
   let(:player2) {HumanPlayer.new}
+  let(:computer_player) {ComputerPlayer.new}
 
   it "runs the game"
 
   describe "#create_players" do
-    it "creates players for the game" do
+    it "creates 2 human players for the game" do
       expect(game.create_players(2)).to eq([player1,player2])
+    end
+
+    it "it create a human and computer player for the game" do
+      expect(game.create_players(1)).to eq([player1, computer_player])
     end
   end
 
@@ -34,7 +39,7 @@ describe Game do
   end
 
   describe "#assign_token" do
-    it "assigns a token to each player" do
+    it "assigns a token to each human player" do
       players = [player1,player2]
       tokens = ["x","o"]
 
@@ -42,6 +47,16 @@ describe Game do
 
       expect(player1.token).to eq("x")
       expect(player2.token).to eq("o")
+    end
+
+    it "assigns a token to human player and cpu" do
+      players = [player1,computer_player]
+      tokens = ["x","o"]
+
+      game.assign_token(players,"x","o")
+
+      expect(player1.token).to eq("x")
+      expect(computer_player.token).to eq("o")
     end
   end
 
@@ -56,9 +71,36 @@ describe Game do
     end
   end
 
-  it "assigns a token to the computer"
+  it "will move to a corner when the board is empty" do
+    computer_player.evaluate_board(board)
 
-  it "will choose the winning move if given the option"
+    expect([1,3,7,9]).to include(computer_player.best_move)
+  end
+
+  it "will take only available position" do
+    board.set_move(1, "x").set_move(2, "x").set_move(3, "o")
+         .set_move(4, "o").set_move(5, "o").set_move(6, "x")
+         .set_move(7, "x").set_move(9, "o")
+    computer_player.evaluate_board(board)
+
+    expect(computer_player.best_move).to eq(8)
+  end
+
+  it "will choose the winning move if given the option" do
+    board.set_move(1,"x").set_move(2,"o").set_move(4,"x").set_move(9,"o")
+
+    computer_player.evaluate_board(board)
+
+    expect(computer_player.best_move).to eq(7)
+  end
+
+  it "will block the winning move if given the option" do
+    board.set_move(1,"x").set_move(2,"o").set_move(3,"x").set_move(8,"o")
+
+    computer_player.evaluate_board(board)
+
+    expect(computer_player.best_move).to eq(5)
+  end
 
   it "will block an opponent"
 

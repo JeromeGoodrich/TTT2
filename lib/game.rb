@@ -1,9 +1,12 @@
+require "computer_player"
+
 class Game
 
-  def initialize(ui,player1,player2)
+  def initialize(ui,player1,player2, computer_player)
     @ui = ui
     @player1 = player1
     @player2 = player2
+    @computer_player = computer_player
   end
 
   def run
@@ -39,6 +42,9 @@ class Game
     if number_of_players == 2
       players << @player1
       players << @player2
+    elsif number_of_players ==1
+      players << @player1
+      players << @computer_player
     end
     return players
   end
@@ -57,6 +63,6 @@ class Game
   end
 
   def get_move(player,move)
-    player.move = move
+    player.move = move.to_i
   end
 end
