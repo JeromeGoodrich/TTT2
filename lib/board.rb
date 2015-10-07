@@ -2,7 +2,7 @@ class Board
   attr_reader :size, :array_of_spaces
   def initialize(size)
     @size = size
-    @array_of_spaces = (1..(@size)).to_a
+    @array_of_spaces = Array.new(@size)
   end
 
   def rows
@@ -10,19 +10,7 @@ class Board
   end
 
   def columns
-    column = []
-    array_of_columns = []
-    first_of_columns = (0..depth).to_a
-    count = 0
-
-    first_of_columns.each do |first_of_column|
-      while count <= depth - 1
-        column << @array_of_spaces[first_of_column + (depth*count)]
-        count +=1
-      end
-      array_of_columns << column
-      return array_of_columns
-    end
+    rows.transpose
   end
 
   def diagonal
@@ -67,7 +55,13 @@ class Board
   end
 
   def available_spaces
-    array_of_spaces - ["x","o"]
+    a = []
+    array_of_spaces.each_with_index do |space, index|
+      if space.nil?
+        a << (index+1)
+      end
+    end
+    return a
   end
 
   def winning_row?
@@ -79,6 +73,7 @@ class Board
         break
       end
     end
+    return false
   end
 
   def winning_column?
@@ -87,7 +82,6 @@ class Board
       ocolumn = column - ["o"]
       if xcolumn.empty? || ocolumn.empty?
         return true
-        break
       end
     end
     return false
@@ -104,6 +98,7 @@ class Board
       elsif xreverse_diagonal.empty? || oreverse_diagonal.empty?
         return true
       end
+    return false
   end
 
   def tie_game?

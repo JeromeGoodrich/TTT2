@@ -2,11 +2,16 @@ class ComputerPlayer
 
   attr_accessor :token, :best_move
 
-  WINNING_COMBOS = [[1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,8], [3,6,9], [1,5,9], [3,5,7]]
-
   def winning_move(board, move)
     board.set_move(move, "x")
-    someone_won = board.winning_column?
+    someone_won = board.winning_row? || board.winning_column? || board.winning_diagonal?
+    board.array_of_spaces[move - 1] = move
+    return someone_won
+  end
+
+  def block_opponent(board,move)
+    board.set_move(move, "o")
+    someone_won = board.winning_row? || board.winning_column? || board.winning_diagonal?
     board.array_of_spaces[move - 1] = move
     return someone_won
   end
@@ -18,9 +23,6 @@ class ComputerPlayer
       @best_move = board.available_spaces.first
     elsif board.available_spaces == [4,5,6,7,9]
       @best_move = 5
-
-
-
     else
       board.available_spaces.each do |space|
         if winning_move(board, space)

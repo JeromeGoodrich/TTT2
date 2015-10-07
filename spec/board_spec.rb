@@ -40,9 +40,9 @@ describe Board do
 
   describe "#winning_column?" do
     it "declares a winner if any column is marked by the same 3 tokens" do
-      board.set_move(1,"o")
-      board.set_move(4,"o")
-      board.set_move(7,"o")
+      board.set_move(2,"o")
+      board.set_move(5,"o")
+      board.set_move(8,"o")
 
       expect(board.winning_column?).to eq(true)
     end

@@ -29,10 +29,15 @@ class UserInterface
     @output.print "Player 1, make your move"
   end
 
+  def print_char(board, space)
+    move = @board.read_move(space)
+    return space if move.nil? else move
+  end
+
   def print_board
-    @output.print "#{@board.read_move(1)}|#{@board.read_move(2)}|#{@board.read_move(3)}\n" +
-                  "#{@board.read_move(4)}|#{@board.read_move(5)}|#{@board.read_move(6)}\n" +
-                  "#{@board.read_move(7)}|#{@board.read_move(8)}|#{@board.read_move(9)}\n"
+    @output.print "#{print_char(@board, 1)}|#{print_char(@board, 2)}|#{print_char(@board, 3)}\n" +
+                  "#{print_char(@board, 4)}|#{print_char(@board, 5)}|#{print_char(@board, 6)}\n" +
+                  "#{print_char(@board, 7)}|#{print_char(@board, 8)}|#{print_char(@board, 9)}\n"
   end
 
   def computer_thinking
