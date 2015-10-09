@@ -14,6 +14,8 @@ describe Game do
   let(:player1) {HumanPlayer.new}
   let(:player2) {HumanPlayer.new}
   let(:computer_player) {ComputerPlayer.new}
+  let(:players) {[computer_player, player1]}
+
 
   it "runs the game"
 
@@ -101,6 +103,67 @@ describe Game do
 
     expect(computer_player.best_move).to eq(5)
   end
+
+  it "will prioritize creating a fork if winning or blocking are not options" do
+    board.set_move(1,"x").set_move(3,"o").set_move(7, "x").set_move(4, "o")
+
+    computer_player.evaluate_board(board)
+
+    expect(computer_player.best_move).to eq(9)
+  end
+
+  it "will prioritize creating a fork if winning or blocking are not options" do
+    board.set_move(1,"x").set_move(7,"o").set_move(3, "x").set_move(2, "o")
+
+    computer_player.evaluate_board(board)
+
+    expect(computer_player.best_move).to eq(9)
+  end
+
+  it "will prioritize creating a fork if winning or blocking are not options" do
+    board.set_move(1,"x").set_move(9,"o").set_move(7, "x").set_move(4, "o")
+
+    computer_player.evaluate_board(board)
+
+    expect(computer_player.best_move).to eq(3)
+  end
+
+  it "will prioritize creating a fork if winning or blocking are not options" do
+    board.set_move(1,"x").set_move(9,"o").set_move(3, "x").set_move(2, "o")
+
+    computer_player.evaluate_board(board)
+
+    expect(computer_player.best_move).to eq(7)
+  end
+
+  it "will prioritize creating a fork if winning or blocking are not options" do
+    board.set_move(1,"x").set_move(2,"o").set_move(5, "x").set_move(9, "o")
+
+    computer_player.evaluate_board(board)
+
+    expect(computer_player.best_move).to eq(7)
+  end
+
+  it "will return 10 in a winning terminal game state" do
+    board.set_move(1,"x").set_move(2,"o").set_move(5, "x").set_move(9,"o").set_move(7, "x").set_move(4,"o").      set_move(3,"x")
+
+    expect(computer_player.score(board)).to eq(10)
+  end
+
+  it "will return 0 in a tied terminal game state" do
+    board.set_move(1,"x").set_move(2,"o").set_move(5, "x").set_move(9,"o").set_move(7, "x").set_move(4,"o").      set_move(6,"x").set_move(3,"o").set_move(8,"x")
+
+    expect(computer_player.score(board)).to eq(0)
+  end
+
+  it "will return -10 in a losing terminal game state"
+
+
+
+
+
+
+  it "will block an opponents fork by creating two in a row"
 
   it "will block an opponent"
 

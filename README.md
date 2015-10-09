@@ -172,9 +172,9 @@ I spent the first part of the day making my tests for various winning conditions
 
 When I got back to my computer, I wanted to start working on testing my game class, after exporting all my tests to  their respective spec files, my game file was looking rather bare. I had a couple  of tests to account fo the creation of players, but I had borrowed those from someone elses code a while back when I had first started trying to reconstruct my TTT game using TDD. I pulled up that codebase for a hint of what to do next and soon found myself simply copying his code. It was certainly easier, but it was lazy, it wasn't disciplined and it certainly wasn't what a craftsman would do. So I deleted all the code in my game_spec.rb file and started over with a clear conscience determined to do it again with the mentality of craftsman.
 
+After making some steady progress pairing with Kofi the other day. I've gotten to a point in my current line of testing that doesn't seem to offer much of a way forward. The test I'm trying to get pass is to have the AI choose a "fork" when a win or a block aren't available. There seems to be infinite ways to create a fork, or at least way too many to test each board arrangement individually. So I did 5 or so and tried to see if any patterns emerged or if anything clicked. When it seemed like something did, I started to refactor, only to end up at a dead end before taking a different tact. At a certain point, several hours after wrestling with this particular issue. I decided that my approach was not cutting it at all and I needed to step back. So since no test is really coming easy right now, It might make more sense to test the minimax algorithm directly.
 
-
-
+From what I can remember about minimax the first time I built it, is that it scores game states to select the best move. So it might make sense to first test those game_states and their expected return values.
 
 
 
