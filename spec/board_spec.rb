@@ -3,6 +3,8 @@ require "board"
 
 describe Board do
   let(:board) {Board.new(9)}
+  let(:board4x4) {Board.new(16)}
+  let(:board9x9) {Board.new(81)}
 
   describe "#set_move" do
     it "allows a player to make a move on the board by inputing the number of a space " do
@@ -29,12 +31,22 @@ describe Board do
   end
 
   describe "#winning_row?" do
-    it "declares a winner if any row is marked by the same 3 tokens" do
-      board.set_move(4,"o")
-      board.set_move(5,"o")
-      board.set_move(6,"o")
+    it "declares a winner if a row is filled by the same token on a 3x3 board" do
+      board.set_move(4,"o").set_move(5,"o").set_move(6,"o")
 
       expect(board.winning_row?).to eq(true)
+    end
+
+    it "declares a winner if a row is filled by the same token on a 4x4 board" do
+      board4x4.set_move(5,"o").set_move(6,"o").set_move(7,"o").set_move(8,"o")
+
+      expect(board4x4.winning_row?).to eq(true)
+    end
+
+    it "declares a winner if a row is filled by the same token on a 9x9 board" do
+      board9x9.set_move(1,"o").set_move(2,"o").set_move(3,"o").set_move(4,"o").set_move(5,"o").set_move(6,"o").set_move(7,"o").set_move(8,"o").set_move(9,"o")
+
+      expect(board9x9.winning_row?).to eq(true)
     end
   end
 
