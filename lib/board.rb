@@ -1,8 +1,22 @@
 class Board
   attr_reader :size, :array_of_spaces
+  XTOKEN = "x"
+  OTOKEN = "o"
+
   def initialize(size)
     @size = size
     @array_of_spaces = Array.new(@size)
+
+  end
+
+  def token
+    if size.odd? && available_spaces.even?
+      return OTOKEN
+    elsif size.even? && available_spaces.even?
+      return OTOKEN
+    else
+      return XTOKEN
+    end
   end
 
   def rows
