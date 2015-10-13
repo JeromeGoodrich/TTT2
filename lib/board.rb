@@ -10,9 +10,9 @@ class Board
   end
 
   def token
-    if size.odd? && available_spaces.even?
+    if size.odd? && available_spaces.count.even?
       return OTOKEN
-    elsif size.even? && available_spaces.even?
+    elsif size.even? && available_spaces.count.even?
       return OTOKEN
     else
       return XTOKEN
@@ -80,9 +80,8 @@ class Board
 
   def winning_row?
     rows.each do |row|
-      xrow = row - ["x"]
-      orow = row - ["o"]
-      if xrow.empty? || orow.empty?
+      row -= [token]
+      if row.empty?
         return true
         break
       end
