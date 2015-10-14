@@ -2,20 +2,6 @@ class ComputerPlayer
 
   attr_accessor :token, :best_move
 
-  def winning_move(board, move)
-    board.set_move(move, "x")
-    someone_won = board.winning_row? || board.winning_column? || board.winning_diagonal?
-    board.array_of_spaces[move - 1] = move
-    return someone_won
-  end
-
-  def block_opponent(board,move)
-    board.set_move(move, "o")
-    someone_won = board.winning_row? || board.winning_column? || board.winning_diagonal?
-    board.array_of_spaces[move - 1] = move
-    return someone_won
-  end
-
   def score(board)
     someone_won = board.winning_row? || board.winning_column? || board.winning_diagonal?
     if someone_won
@@ -27,7 +13,7 @@ class ComputerPlayer
   end
 
   def evaluate_board(board)
-    if board.available_spaces == (1..9).to_a
+    if board.available_spaces == (1..board.size).to_a
       @best_move = 1
     elsif board.available_spaces.length == 1
       @best_move = board.available_spaces.first
@@ -48,6 +34,22 @@ class ComputerPlayer
         end
       end
     end
+  end
+
+private
+
+  def winning_move(board, move)
+    board.set_move(move, "x")
+    someone_won = board.winning_row? || board.winning_column? || board.winning_diagonal?
+    board.array_of_spaces[move - 1] = move
+    return someone_won
+  end
+
+  def block_opponent(board, move)
+    board.set_move(move, "o")
+    someone_won = board.winning_row? || board.winning_column? || board.winning_diagonal?
+    board.array_of_spaces[move - 1] = move
+    return someone_won
   end
 end
 

@@ -38,7 +38,7 @@ describe Board do
     end
 
     it "declares a winner if a row is filled by the same token on a 4x4 board" do
-      board4x4.set_move(5,"o").set_move(6,"o").set_move(7,"o").set_move(8,"o")
+      board4x4.set_move(5,"x").set_move(6,"x").set_move(7,"x").set_move(8,"x")
 
       expect(board4x4.winning_row?).to eq(true)
     end
@@ -58,7 +58,7 @@ describe Board do
     end
 
     it "declares a winner if a column is filled by the same token on a 4x4 board" do
-      board4x4.set_move(2,"o").set_move(6,"o").set_move(10,"o").set_move(14,"o")
+      board4x4.set_move(2,"x").set_move(6,"x").set_move(10,"x").set_move(14,"x")
 
       expect(board4x4.winning_column?).to eq(true)
     end

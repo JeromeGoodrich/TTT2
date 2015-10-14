@@ -6,13 +6,12 @@ class Board
   def initialize(size)
     @size = size
     @array_of_spaces = Array.new(@size)
-
   end
 
   def token
     if size.odd? && available_spaces.count.even?
       return OTOKEN
-    elsif size.even? && available_spaces.count.even?
+    elsif size.even? && available_spaces.count.odd?
       return OTOKEN
     else
       return XTOKEN
@@ -91,10 +90,10 @@ class Board
 
   def winning_column?
     columns.each do |column|
-      xcolumn = column - ["x"]
-      ocolumn = column - ["o"]
-      if xcolumn.empty? || ocolumn.empty?
+      column -= [token]
+      if column.empty?
         return true
+        break
       end
     end
     return false
