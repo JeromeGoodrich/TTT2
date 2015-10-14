@@ -31,6 +31,7 @@ describe ComputerPlayer do
 
   xit "will block the winning move if given the option" do
     board.set_move(1,"x").set_move(2,"o").set_move(3,"x").set_move(8,"o")
+    computer_player.token = "x"
 
     computer_player.evaluate_board(board)
 

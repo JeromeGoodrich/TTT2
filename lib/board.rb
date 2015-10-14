@@ -120,4 +120,16 @@ class Board
       return false
     end
   end
+
+  def someone_won?
+    winning_row? || winning_column? || winning_diagonal?
+  end
+
+  def game_over?
+    someone_won? || tie_game?
+  end
+
+  def reset_move(move)
+    array_of_spaces[move - 1] = move
+  end
 end

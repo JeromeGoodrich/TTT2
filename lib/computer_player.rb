@@ -3,15 +3,12 @@ class ComputerPlayer
   attr_accessor :token, :best_move
 
   def score(board)
-    someone_won = board.winning_row? || board.winning_column? || board.winning_diagonal?
-    if (board.token == "o") && someone_won
+    if (board.token == "o") && board.someone_won?
       return 10
-    elsif (board.token == "x") && someone_won
+    elsif (board.token == "x") && board.someone_won?
       return -10
     elsif board.tie_game?
       return 0
-    else
-      return nil
     end
   end
 
@@ -43,16 +40,22 @@ private
 
   def winning_move(board, move)
     board.set_move(move, "x")
-    someone_won = board.winning_row? || board.winning_column? || board.winning_diagonal?
-    board.array_of_spaces[move - 1] = move
-    return someone_won
+    if board.someone_won?
+      return board.someone_won?
+    else
+      board.reset_move(move)
+      return false
+    end
   end
 
   def block_opponent(board, move)
     board.set_move(move, "o")
-    someone_won = board.winning_row? || board.winning_column? || board.winning_diagonal?
-    board.array_of_spaces[move - 1] = move
-    return someone_won
+    if board.someone_won?
+      return board.someone_won?
+    else
+      board.reset_move(move)
+      return false
+    end
   end
 end
 
