@@ -89,5 +89,9 @@ describe ComputerPlayer do
     expect(computer_player.score(board)).to eq(0)
   end
 
-  it "will return -10 in a losing terminal game state"
+  it "will return -10 in a losing terminal game state" do
+    board.set_move(1,"x").set_move(3,"o").set_move(8,"x").set_move(5,"o").set_move(2, "x").set_move(7,"o")
+
+    expect(computer_player.score(board)).to eq(-10)
+  end
 end

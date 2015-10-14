@@ -4,11 +4,14 @@ class ComputerPlayer
 
   def score(board)
     someone_won = board.winning_row? || board.winning_column? || board.winning_diagonal?
-    if someone_won
+    if (board.token == "o") && someone_won
       return 10
-    end
-    if board.tie_game?
+    elsif (board.token == "x") && someone_won
+      return -10
+    elsif board.tie_game?
       return 0
+    else
+      return nil
     end
   end
 
