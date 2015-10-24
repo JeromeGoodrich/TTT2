@@ -3,9 +3,9 @@ class ComputerPlayer
   attr_accessor :token, :best_move
 
   def score(board)
-    if (board.token == token) && board.someone_won?
+    if (board.token != token) && board.someone_won?
       return 10
-    elsif (board.token != token) && board.someone_won?
+    elsif (board.token == token) && board.someone_won?
       return -10
     elsif board.tie_game?
       return 0
@@ -13,13 +13,7 @@ class ComputerPlayer
   end
 
   def evaluate_board(board)
-    list_of_scores = {}
-    score(board)
 
-    board.available_spaces.each do |space|
-      board.set_move(space, board.next_player_token)
-      list_of_scores[space] = evaluate_board(board)
-    end
 
     if board.available_spaces == (1..board.size).to_a
       @best_move = 1

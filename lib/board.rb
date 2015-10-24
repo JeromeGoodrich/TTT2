@@ -114,7 +114,7 @@ class Board
   end
 
   def tie_game?
-    unless winning_row? && winning_column? && winning_diagonal? && available_spaces.empty? == false
+    if !winning_row? && !winning_column? && !winning_diagonal? && available_spaces.empty?
       return true
     else
       return false
