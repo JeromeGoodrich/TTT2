@@ -32,19 +32,19 @@ describe Board do
 
   describe "#winning_row?" do
     it "declares a winner if a row is filled by the same token on a 3x3 board" do
-      board.set_move(4,"o").set_move(5,"o").set_move(6,"o")
+      board.set_move(1,"x").set_move(4,"o").set_move(7,"x").set_move(5,"o").set_move(3,"x").set_move(6,"o")
 
       expect(board.winning_row?).to eq(true)
     end
 
     it "declares a winner if a row is filled by the same token on a 4x4 board" do
-      board4x4.set_move(5,"x").set_move(6,"x").set_move(7,"x").set_move(8,"x")
+      board4x4.set_move(5,"x").set_move(4,"o").set_move(6,"x").set_move(1,"o").set_move(7,"x").set_move(3,"o")      .set_move(8,"x")
 
       expect(board4x4.winning_row?).to eq(true)
     end
 
     it "declares a winner if a row is filled by the same token on a 9x9 board" do
-      board9x9.set_move(1,"o").set_move(2,"o").set_move(3,"o").set_move(4,"o").set_move(5,"o").set_move(6,"o").set_move(7,"o").set_move(8,"o").set_move(9,"o")
+      board9x9.set_move(10,"x").set_move(1,"o").set_move(11,"x").set_move(2,"o").set_move(12,"x").set_move(3,"o")      .set_move(13,"x").set_move(4,"o").set_move(14,"x").set_move(5,"o").set_move(15,"x").set_move(6,"o")      .set_move(16,"x").set_move(7,"o").set_move(17,"x").set_move(8,"o").set_move(20,"x").set_move(9,"o")
 
       expect(board9x9.winning_row?).to eq(true)
     end
@@ -52,19 +52,22 @@ describe Board do
 
   describe "#winning_column?" do
     it "declares a winner if a column is filled by the same token on a 3x3 board" do
-      board.set_move(2,"o").set_move(5,"o").set_move(8,"o")
+      board.set_move(1,"x").set_move(2,"o").set_move(7,"x").set_move(5,"o").set_move(3,"x").set_move(8,"o")
 
       expect(board.winning_column?).to eq(true)
     end
 
     it "declares a winner if a column is filled by the same token on a 4x4 board" do
-      board4x4.set_move(2,"x").set_move(6,"x").set_move(10,"x").set_move(14,"x")
+      board4x4.set_move(2,"x").set_move(4,"o").set_move(6,"x").set_move(1,"o").set_move(10,"x").set_move(3,"o")      .set_move(14,"x")
 
       expect(board4x4.winning_column?).to eq(true)
     end
 
     it "declares a winner if a column is filled by the same token on a 9x9 board" do
-      board9x9.set_move(1,"o").set_move(10,"o").set_move(19,"o").set_move(28,"o").set_move(37,"o").set_move(46, "o").set_move(55,"o").set_move(64,"o").set_move(73,"o")
+      board9x9.set_move(20,"x").set_move(1,"o").set_move(11,"x").set_move(10,"o").set_move(12,"x")
+              .set_move(19,"o").set_move(13,"x").set_move(28,"o").set_move(14,"x").set_move(37,"o")
+              .set_move(15,"x").set_move(46,"o").set_move(16,"x").set_move(55,"o").set_move(17,"x")
+              .set_move(64,"o").set_move(30,"x").set_move(73,"o")
 
       expect(board9x9.winning_column?).to eq(true)
     end

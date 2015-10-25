@@ -19,12 +19,10 @@ class Board
   end
 
   def last_token_placed
-    if size.odd? && available_spaces.count.odd?
-      return OTOKEN
-    elsif size.even? && available_spaces.count.even?
-      return OTOKEN
-    else
+    if token == OTOKEN
       return XTOKEN
+    elsif token == XTOKEN
+      return OTOKEN
     end
   end
 
@@ -90,8 +88,8 @@ class Board
 
   def winning_row?
     rows.each do |row|
-      uniq_row = row.uniq
-      if uniq_row.length == 1
+      row -= [last_token_placed]
+      if row.empty?
         return true
         break
       end
@@ -101,8 +99,8 @@ class Board
 
   def winning_column?
     columns.each do |column|
-      uniq_column = column.uniq
-      if uniq_column.length == 1
+      column -= [last_token_placed]
+      if column.empty?
         return true
         break
       end
@@ -111,9 +109,13 @@ class Board
   end
 
   def winning_diagonal?
-    uniq_diagonal = diagonal.uniq
-    uniq_reverse_diagonal = reverse_diagonal.uniq
-      if uniq_diagonal.length == 1 || uniq_reverse_diagonal.length == 1
+    xdiagonal = diagonal - ["x"]
+    odiagonal = diagonal - ["o"]
+    xreverse_diagonal = reverse_diagonal - ["x"]
+    oreverse_diagonal = reverse_diagonal - ["o"]
+      if xdiagonal.empty? || odiagonal.empty?
+        return true
+      elsif xreverse_diagonal.empty? || oreverse_diagonal.empty?
         return true
       end
     return false
@@ -136,6 +138,6 @@ class Board
   end
 
   def reset_move(move)
-    array_of_spaces[move - 1] = move
+    array_of_spaces[move - 1] = nil
   end
 end

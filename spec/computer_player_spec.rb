@@ -10,10 +10,10 @@ describe ComputerPlayer do
     computer_player.token = "x"
     computer_player.evaluate_board(board,0)
 
-    expect([1,3,7,9]).to include(computer_player.best_move)
+    expect(computer_player.best_move).to eq(1)
   end
 
-  xit "will take only available position" do
+  it "will take only available position" do
     computer_player.token = "x"
     board.set_move(1, "x").set_move(2, "x").set_move(3, "o")
          .set_move(4, "o").set_move(5, "o").set_move(6, "x")
@@ -32,17 +32,16 @@ describe ComputerPlayer do
     expect(computer_player.best_move).to eq(7)
   end
 
-  xit "will block the winning move if given the option" do
+  it "will block the winning move if given the option" do
     computer_player.token = "x"
     board.set_move(1,"x").set_move(2,"o").set_move(3,"x").set_move(8,"o")
-    computer_player.token = "x"
 
     computer_player.evaluate_board(board,0)
 
     expect(computer_player.best_move).to eq(5)
   end
 
-  xit "will prioritize creating a fork if winning or blocking are not options" do
+  it "will prioritize creating a fork if winning or blocking are not options" do
     computer_player.token = "x"
     board.set_move(1,"x").set_move(3,"o").set_move(7, "x").set_move(4, "o")
 
@@ -51,7 +50,7 @@ describe ComputerPlayer do
     expect(computer_player.best_move).to eq(9)
   end
 
-  xit "will prioritize creating a fork if winning or blocking are not options" do
+  it "will prioritize creating a fork if winning or blocking are not options" do
     computer_player.token = "x"
     board.set_move(1,"x").set_move(7,"o").set_move(3, "x").set_move(2, "o")
 
@@ -60,7 +59,7 @@ describe ComputerPlayer do
     expect(computer_player.best_move).to eq(9)
   end
 
-  xit "will prioritize creating a fork if winning or blocking are not options" do
+  it "will prioritize creating a fork if winning or blocking are not options" do
     computer_player.token = "x"
     board.set_move(1,"x").set_move(9,"o").set_move(7, "x").set_move(4, "o")
 
@@ -69,7 +68,7 @@ describe ComputerPlayer do
     expect(computer_player.best_move).to eq(3)
   end
 
-  xit "will prioritize creating a fork if winning or blocking are not options" do
+  it "will prioritize creating a fork if winning or blocking are not options" do
     computer_player.token = "x"
     board.set_move(1,"x").set_move(9,"o").set_move(3, "x").set_move(2, "o")
 
@@ -78,13 +77,13 @@ describe ComputerPlayer do
     expect(computer_player.best_move).to eq(7)
   end
 
-  xit "will prioritize creating a fork if winning or blocking are not options" do
+  it "will prioritize creating a fork if winning or blocking are not options" do
     computer_player.token = "x"
     board.set_move(1,"x").set_move(2,"o").set_move(5, "x").set_move(9, "o")
 
     computer_player.evaluate_board(board,0)
 
-    expect(computer_player.best_move).to eq(7)
+    expect(computer_player.best_move).to eq(7).or eq(4)
   end
 
   it "will return 10 in a winning terminal game state" do
