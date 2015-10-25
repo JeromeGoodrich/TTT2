@@ -18,6 +18,17 @@ class Board
     end
   end
 
+  def last_token_placed
+    if size.odd? && available_spaces.count.odd?
+      return OTOKEN
+    elsif size.even? && available_spaces.count.even?
+      return OTOKEN
+    else
+      return XTOKEN
+    end
+  end
+
+
   def rows
     array_of_spaces.each_slice(depth).to_a
   end
@@ -79,8 +90,8 @@ class Board
 
   def winning_row?
     rows.each do |row|
-      row -= [token]
-      if row.empty?
+      uniq_row = row.uniq
+      if uniq_row.length == 1
         return true
         break
       end
@@ -90,8 +101,8 @@ class Board
 
   def winning_column?
     columns.each do |column|
-      column -= [token]
-      if column.empty?
+      uniq_column = column.uniq
+      if uniq_column.length == 1
         return true
         break
       end
@@ -100,14 +111,9 @@ class Board
   end
 
   def winning_diagonal?
-    xdiagonal = diagonal - ["x"]
-    odiagonal = diagonal - ["o"]
-    xreverse_diagonal = reverse_diagonal - ["x"]
-    oreverse_diagonal = reverse_diagonal - ["o"]
-
-      if xdiagonal.empty? || odiagonal.empty?
-        return true
-      elsif xreverse_diagonal.empty? || oreverse_diagonal.empty?
+    uniq_diagonal = diagonal.uniq
+    uniq_reverse_diagonal = reverse_diagonal.uniq
+      if uniq_diagonal.length == 1 || uniq_reverse_diagonal.length == 1
         return true
       end
     return false
