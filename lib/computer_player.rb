@@ -13,7 +13,7 @@ require "pry"
   end
 
 
-  def evaluate_board(board, depth=0)
+  def evaluate_board(board, depth=0, alpha=-100, beta=100)
 #binding.pry
     if board.game_over?
       return score(board,depth)
@@ -27,6 +27,12 @@ require "pry"
         val = evaluate_board(potential_board, depth + 1)
           if val < best_val
             best_val = val
+              if best_val < beta
+                beta = best_val
+                  if beta <= alpha
+                    break
+                  end
+              end
           end
         board.reset_move(space)
         scores[space] = best_val
@@ -38,6 +44,12 @@ require "pry"
         val = evaluate_board(potential_board, depth + 1)
           if val > best_val
             best_val = val
+              if best_val > alpha
+                alpha = best_val
+                  if beta <= alpha
+                    break
+                  end
+              end
           end
         board.reset_move(space)
         scores[space] = best_val
