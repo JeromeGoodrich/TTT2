@@ -13,7 +13,7 @@ require "pry"
   end
 
 
-  def evaluate_board(board, depth=0, alpha=-100, beta=100)
+  def move(board, depth=0, alpha=-100, beta=100)
 #binding.pry
     if board.game_over?
       return score(board,depth)
@@ -24,7 +24,7 @@ require "pry"
       best_val = 100
       board.available_spaces.each do |space|
         potential_board = board.set_move(space, board.token)
-        val = evaluate_board(potential_board, depth + 1)
+        val = move(potential_board, depth + 1)
           if val < best_val
             best_val = val
               if best_val < beta
@@ -41,7 +41,7 @@ require "pry"
       best_val = -100
       board.available_spaces.each do |space|
         potential_board = board.set_move(space, board.token)
-        val = evaluate_board(potential_board, depth + 1)
+        val = move(potential_board, depth + 1)
           if val > best_val
             best_val = val
               if best_val > alpha

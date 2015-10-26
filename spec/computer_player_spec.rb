@@ -8,7 +8,7 @@ describe ComputerPlayer do
 
   xit "will move to a corner when the board is empty" do
     computer_player.token = "x"
-    computer_player.evaluate_board(board,0)
+    computer_player.move(board,0)
 
     expect(computer_player.best_move).to eq(1)
   end
@@ -18,7 +18,7 @@ describe ComputerPlayer do
     board.set_move(1, "x").set_move(2, "x").set_move(3, "o")
          .set_move(4, "o").set_move(5, "o").set_move(6, "x")
          .set_move(7, "x").set_move(9, "o")
-    computer_player.evaluate_board(board,0)
+    computer_player.move(board,0)
 
     expect(computer_player.best_move).to eq(8)
   end
@@ -27,7 +27,7 @@ describe ComputerPlayer do
     computer_player.token = "x"
     board.set_move(1,"x").set_move(2,"o").set_move(4,"x").set_move(9,"o")
 
-    computer_player.evaluate_board(board,0)
+    computer_player.move(board,0)
 
     expect(computer_player.best_move).to eq(7)
   end
@@ -36,7 +36,7 @@ describe ComputerPlayer do
     computer_player.token = "x"
     board.set_move(1,"x").set_move(2,"o").set_move(3,"x").set_move(8,"o")
 
-    computer_player.evaluate_board(board,0)
+    computer_player.move(board,0)
 
     expect(computer_player.best_move).to eq(5)
   end
@@ -45,7 +45,7 @@ describe ComputerPlayer do
     computer_player.token = "x"
     board.set_move(1,"x").set_move(3,"o").set_move(7, "x").set_move(4, "o")
 
-    computer_player.evaluate_board(board,0)
+    computer_player.move(board,0)
 
     expect(computer_player.best_move).to eq(9)
   end
@@ -54,7 +54,7 @@ describe ComputerPlayer do
     computer_player.token = "x"
     board.set_move(1,"x").set_move(7,"o").set_move(3, "x").set_move(2, "o")
 
-    computer_player.evaluate_board(board,0)
+    computer_player.move(board,0)
 
     expect(computer_player.best_move).to eq(9)
   end
@@ -63,7 +63,7 @@ describe ComputerPlayer do
     computer_player.token = "x"
     board.set_move(1,"x").set_move(9,"o").set_move(7, "x").set_move(4, "o")
 
-    computer_player.evaluate_board(board,0)
+    computer_player.move(board,0)
 
     expect(computer_player.best_move).to eq(3)
   end
@@ -72,7 +72,7 @@ describe ComputerPlayer do
     computer_player.token = "x"
     board.set_move(1,"x").set_move(9,"o").set_move(3, "x").set_move(2, "o")
 
-    computer_player.evaluate_board(board,0)
+    computer_player.move(board,0)
 
     expect(computer_player.best_move).to eq(7)
   end
@@ -81,7 +81,7 @@ describe ComputerPlayer do
     computer_player.token = "x"
     board.set_move(1,"x").set_move(2,"o").set_move(5, "x").set_move(9, "o")
 
-    computer_player.evaluate_board(board,0)
+    computer_player.move(board,0)
 
     expect(computer_player.best_move).to eq(7).or eq(4)
   end
@@ -106,4 +106,5 @@ describe ComputerPlayer do
 
     expect(computer_player.score(board,0)).to eq(-10)
   end
+
 end

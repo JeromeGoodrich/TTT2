@@ -2,7 +2,7 @@ require "computer_player"
 
 class Game
 
-  def initialize(ui,player1,player2, computer_player)
+  def initialize(ui,player1,player2,computer_player)
     @ui = ui
     @player1 = player1
     @player2 = player2
@@ -22,19 +22,19 @@ class Game
   end
 
   def game_loop(players)
-    # if @board.game_over?
-    #   @ui.game_over
-    #   exit
-    # else
-    #   player = players.first
-    #   @ui.print_board
-    #   move = @ui.make_move
-    #   get_move(player, move)
-    #   @board.set_move(player.move, player.token)
-    #   @ui.print_board
-    #   players = player.reverse
-    #   game_loop(players)
-    # end
+    if @board.game_over?
+      @ui.game_over
+      exit
+    else
+      player = players.first
+      @ui.print_board
+      move = @ui.make_move
+      get_move(player, move)
+      @board.set_move(player.move, player.token)
+      @ui.print_board
+      players = player.reverse
+      game_loop(players)
+    end
   end
 
   def create_players(number_of_players)
