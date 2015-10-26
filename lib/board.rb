@@ -26,7 +26,6 @@ class Board
     end
   end
 
-
   def rows
     array_of_spaces.each_slice(depth).to_a
   end
@@ -86,55 +85,55 @@ class Board
     return a
   end
 
-  def winning_row?
+  def winning_row
     rows.each do |row|
       row -= [last_token_placed]
       if row.empty?
-        return true
+        return last_token_placed
         break
       end
     end
-    return false
+    return nil
   end
 
-  def winning_column?
+  def winning_column
     columns.each do |column|
       column -= [last_token_placed]
       if column.empty?
-        return true
+        return last_token_placed
         break
       end
     end
-    return false
+    return nil
   end
 
-  def winning_diagonal?
+  def winning_diagonal
     xdiagonal = diagonal - ["x"]
     odiagonal = diagonal - ["o"]
     xreverse_diagonal = reverse_diagonal - ["x"]
     oreverse_diagonal = reverse_diagonal - ["o"]
       if xdiagonal.empty? || odiagonal.empty?
-        return true
+        return last_token_placed
       elsif xreverse_diagonal.empty? || oreverse_diagonal.empty?
-        return true
+        return last_token_placed
       end
-    return false
+    return nil
   end
 
   def tie_game?
-    if !winning_row? && !winning_column? && !winning_diagonal? && available_spaces.empty?
+    if someone_won.nil? && available_spaces.empty?
       return true
     else
       return false
     end
   end
 
-  def someone_won?
-    winning_row? || winning_column? || winning_diagonal?
+  def someone_won
+    winning_row || winning_column || winning_diagonal
   end
 
   def game_over?
-    someone_won? || tie_game?
+    someone_won || tie_game?
   end
 
   def reset_move(move)

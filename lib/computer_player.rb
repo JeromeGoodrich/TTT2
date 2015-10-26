@@ -1,20 +1,23 @@
 class ComputerPlayer
 
-  attr_accessor :token, :best_move
+  attr_accessor :token, :best_move, :name
 require "pry"
+
   def score(board, depth)
-    if (board.last_token_placed == token) && board.someone_won?
+    if board.someone_won == token
       return 10 - depth
-    elsif (board.last_token_placed != token) && board.someone_won?
+    elsif token == "x" && board.someone_won == "o"
+      return depth - 10
+    elsif token == "o" && board.someone_won == "x"
       return depth - 10
     elsif board.tie_game?
       return 0
     end
   end
 
-
   def move(board, depth=0, alpha=-100, beta=100)
 #binding.pry
+
     if board.game_over?
       return score(board,depth)
     end

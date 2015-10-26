@@ -1,3 +1,5 @@
+require "human_player"
+
 class PlayerSelector
 
   def select(number_of_players,human_player="HumanPlayer",computer_player="ComputerPlayer")
@@ -14,8 +16,6 @@ class PlayerSelector
     end
     return players
   end
-
-  private
 
   def create_player(player_type)
     Object.const_get(player_type).new
